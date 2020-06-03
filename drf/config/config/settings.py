@@ -25,7 +25,7 @@ SECRET_KEY = 'rwbnvk#*ovbqe!a)9m63vamtg90og0ye0kg24j$tp=7dry4fy4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,15 +43,15 @@ INSTALLED_APPS = [
 ]
 
 # react cross origin 열어주기!
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
-# deploy setting
-# CORS_ORIGIN_ALLOW_ALL = False
-# CORS_ORIGIN_WHITELIST = [
-#     'domain',
-# ]
+CORS_ORIGIN_WHITELIST = (
+       'http://localhost:3000',    #React 도메인
+       'http://localhost:8000',    #Django 도메인
+)
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', # crossorigin
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

@@ -1,20 +1,43 @@
-import React, { useState } from 'react';
-// import Box from '@material-ui/core/Box';
+import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Container } from 'nes-react';
 import QuestionList from 'Components/Quiz/QuestionList';
 import Typing from 'react-typing-animation';
+import { BACKEND } from 'config';
+import axios from 'axios';
 
 function Quiz() {
 
     const [start, setStart] = useState(false);
+    const [quiz, setQuiz] = useState(null);
+    
+    useEffect(()=>{
+        console.log(quiz)
+        getQuiz();
+    },[])
+
+    // useEffect(()=>{
+    //     setTimeout(()=>{
+    //         console.log(quiz)
+    //         console.log("이거라고오")  
+    //         console.log(quiz)          
+    //     },1000)
+    // },[quiz])
+    
+    const getQuiz = async() => {
+        const randomset = await axios.get(`${BACKEND}/api/quiz`);
+        console.log(randomset.data)
+        const data = randomset.data
+        setQuiz(data)
+    }
+
     const onStart = () => {
         setStart(true);
     }
+
     return (
         <React.Fragment>
-        
-        {start 
+        {start && quiz
             ?
             <Container>
                 <QuestionWrapper>                
@@ -23,13 +46,16 @@ function Quiz() {
                         <Typing.Backspace count={9} />
                         <Question>다음중 김태훈이 좋아하지 않는 것은?</Question>
                     </Typing>
-
+                    <QuestionList num={1} content={'마!!!!!'} />
+                    <QuestionList num={2} content={'알파카'} />
+                    <QuestionList num={3} content={'자장면'} />
+                    <QuestionList num={4} content={'너...'} />
                 </QuestionWrapper>
+                {/* {quiz.map((quiz)=>
+                    quiz.question
+                )} */}
 
-                <QuestionList num={1} content={'짜장면'} />
-                <QuestionList num={2} content={'짬뽕'} />
-                <QuestionList num={3} content={'울면'} />
-                <QuestionList num={4} content={'너...'} />
+     
             </Container>
             : 
             <Container>
