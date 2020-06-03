@@ -12,10 +12,11 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     src: url(${DungGeunMo});
   }
-  
   *{
     box-sizing: border-box ;
     cursor: default;
+    margin: 0;
+    padding: 0;
   }
   body {
     font-family:  DungGuenMo, 'Noto Sans KR', sans-serif;   

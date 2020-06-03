@@ -39,7 +39,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'quizbackend',
     'rest_framework',
+    'corsheaders',
 ]
+
+# react cross origin 열어주기!
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+# deploy setting
+# CORS_ORIGIN_ALLOW_ALL = False
+# CORS_ORIGIN_WHITELIST = [
+#     'domain',
+# ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
