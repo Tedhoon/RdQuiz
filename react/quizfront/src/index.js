@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Routes from 'Routes';
 import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
+// import reset from "styled-reset";
 import DungGeunMo from "Styles/Fonts/DungGeunMo.ttf";
 
 
@@ -13,7 +13,6 @@ const GlobalStyle = createGlobalStyle`
     src: url(${DungGeunMo});
   }
   
-  ${reset}
   *{
     box-sizing: border-box ;
     cursor: default;

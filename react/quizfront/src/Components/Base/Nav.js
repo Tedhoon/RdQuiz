@@ -1,13 +1,30 @@
 import React from 'react';
-// import { Button } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-const Nav = () => {
+import styled from 'styled-components';
+
+function Nav() {
+    const linkGit = () => {
+        window.open("https://github.com/Tedhoon/RdQuiz");
+    };
+    const linkInsta = () => {
+        window.open("https://www.instagram.com/tedhoon/");
+    }
     return (
-        <React.Fragment>
-            <p>마! 내가 내브다!</p>
-            <Button color="primary">Hello World</Button>;
-        </React.Fragment>
+        <Wrapper>
+            <Icon onClick={linkGit} className="nes-icon github is-medium"></Icon>
+            <Icon onClick={linkInsta} className="nes-icon star is-medium"></Icon>
+        </Wrapper>
     )
 }
 
 export default Nav;
+
+const Wrapper = styled.div`
+    position: absolute;
+    z-index:1;
+    // cursor: url(https://unpkg.com/nes.css/assets/cursor-click.png), pointer;
+`;
+
+const Icon = styled.i`
+    margin: 5px;
+    cursor: url(https://unpkg.com/nes.css/assets/cursor-click.png), pointer;
+`;

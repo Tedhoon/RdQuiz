@@ -1,11 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
 
-const Footer = () => {
+function Footer() {
     return (
-        <React.Fragment>
-            <p>마! 내가 푸터다!</p>
-        </React.Fragment>
+        <Wrapper>
+            마! 내가마리야! 푸터다!!
+        </Wrapper>
     )
 }
 
 export default Footer;
+
+const Wrapper = styled.div`
+    position: absolute;
+    z-index:1;
+    color: red;
+    bottom:0;
+`;
