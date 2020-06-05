@@ -6,31 +6,37 @@ import Typing from 'react-typing-animation';
 import { BACKEND } from 'config';
 import axios from 'axios';
 
+
+const mockAsyncQuizData = () =>
+  new Promise(resolve => {
+    setTimeout(async function() {
+      const result = await axios.get(`${BACKEND}/api/quiz`)
+      resolve({
+        data: [
+            result.data[0],
+            result.data[1],
+            result.data[2],
+            result.data[3],
+            result.data[4],
+        ]
+      });
+    }, 250);
+  });
+
+
 function Quiz() {
-
     const [start, setStart] = useState(false);
-    const [quiz, setQuiz] = useState(null);
-    
-    // const [handleQuiz, setHandleQuiz] = useState({'index':1})
-    // const [score, setScore] = useState(0);
+    const [quizData, setQuizData] = useState(null);
+    const [num, setNum] = useState(1);     
 
-    const [num, setNum] = useState(1); 
-    
-    
-    const getQuiz = async() => {
-        const randomset = await axios.get(`${BACKEND}/api/quiz`)
-        // 여기서 promise반환하기? 
-        const data = randomset.data
-        console.log(data)
-        setQuiz([
-            data[0],
-            data[1],
-            data[2],
-            data[3],
-            data[4]
-        ])
-    }
-
+    const getQuiz = useCallback(async () => {
+        try {
+          const { data } = await mockAsyncQuizData();
+          setQuizData(data);
+        } catch (err) {
+          console.error(err);
+        }
+      }, []);
     
     useEffect(()=>{
         getQuiz();
@@ -38,11 +44,8 @@ function Quiz() {
 
     const onStart = () => {
         setStart(true);
+        console.log(quizData)
     }
-
-    // const onCalculate = () => {
-        
-    // }
 
     const onCalculate = useCallback(()=>{
         setNum(num+1);
@@ -51,26 +54,22 @@ function Quiz() {
 
 
     // quiz start!
-    if(start && quiz) 
+    if(start && quizData) 
         return (
             <Container>
                 <QuestionWrapper>
-                        <React.Fragment>
-                                <QuestionInfo>{num}번문제</QuestionInfo>
-                                {/* <Typing.Backspace count={9} /> */}
-                                <Question>{quiz[num].question}</Question>
-                                {quiz[num].answer_list.split('/').map((ans, index)=>
-                                    <QuestionList key={index+1} num={index+1} clickEvent={onCalculate} content={ans} />
-                                )}
-                        </React.Fragment>
-                    
+                    <React.Fragment>
+                        <QuestionInfo>{num}번문제</QuestionInfo>
+                        {/* <Typing.Backspace count={9} /> */}
+                        <Question>{quizData[num].question}</Question>
+                        {quizData[num].answer_list.split('/').map((ans, index)=>
+                            <QuestionList key={index+1} num={index+1} clickEvent={onCalculate} content={ans} />
+                        )}
+                    </React.Fragment>
                 </QuestionWrapper>
             </Container>
         )
 
-
-
-    // 메인화면
     return (
         <Container>
             <Typing>
@@ -85,9 +84,11 @@ function Quiz() {
 
 export default Quiz;
 
+
+// styled-components
 const StartButton = styled.button`
     display: block;
-    width: 200px;
+    width: 280px;
 
 `;
 
@@ -103,6 +104,7 @@ const strong = keyframes`
 const QuestionWrapper = styled.div`
     min-height: 150px;
 `;
+
 const QuestionInfo = styled.div`
     font-size: 1.2rem;
     max-width: 280px;
