@@ -11,5 +11,5 @@ class QuizView(APIView):
     '''
     def get(self, request, format=None):
         randomset = sorted(Quiz.objects.all(), key=lambda x: random.random())
-        serializer = QuizSerializer(randomset[0:3], many=True)
+        serializer = QuizSerializer(randomset[0:5], many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
