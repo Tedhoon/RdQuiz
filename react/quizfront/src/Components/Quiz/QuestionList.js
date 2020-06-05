@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 function QuestionList(props) {
-    const { num, content } = props;
+    const { num, content, clickEvent } = props;
     const [nes, setNes] = useState('');
     const [answer, setAnswer] = useState(true);
 
     useEffect(()=>{
+        setAnswer(true);
         setTimeout(() => {
         switch(num) {
             case 1:
@@ -25,14 +26,14 @@ function QuestionList(props) {
                 setNes('is-primary');
         }
         setAnswer(false);
-    },4000)
-    },[])
+    },1000)
+    },[clickEvent])
 
     return (
         <React.Fragment>
             {answer 
                 ? <RetroBtn className="nes-btn is-disabled">?</RetroBtn>
-                : <RetroBtn className={`nes-btn ${nes}`}>{content}</RetroBtn>
+                : <RetroBtn onClick={clickEvent} className={`nes-btn ${nes}`}>{content}</RetroBtn>
             }
         </React.Fragment>
     )

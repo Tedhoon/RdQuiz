@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Container } from 'nes-react';
 import QuestionList from 'Components/Quiz/QuestionList';
@@ -11,75 +11,85 @@ function Quiz() {
     const [start, setStart] = useState(false);
     const [quiz, setQuiz] = useState(null);
     
-    const [handleQuiz, setHandleQuiz] = useState({'index':1})
-    const [score, setScore] = useState(0);
+    // const [handleQuiz, setHandleQuiz] = useState({'index':1})
+    // const [score, setScore] = useState(0);
+
+    const [num, setNum] = useState(1); 
     
-    useEffect(()=>{
-        // console.log(quiz)
-        getQuiz();
-    },[])
     
     const getQuiz = async() => {
         const randomset = await axios.get(`${BACKEND}/api/quiz`)
         // 여기서 promise반환하기? 
         const data = randomset.data
         console.log(data)
-        setQuiz({
-            '1번':data[0],
-            '2번':data[1],
-            '3번':data[2],
-            '4번':data[3],
-            '5번':data[4]
-        })
-        
+        setQuiz([
+            data[0],
+            data[1],
+            data[2],
+            data[3],
+            data[4]
+        ])
     }
+
+    
+    useEffect(()=>{
+        getQuiz();
+    },[])
 
     const onStart = () => {
         setStart(true);
-        console.log(quiz['1번'])
     }
 
-    const onCalculate = () => {
-        setHandleQuiz({'index':2})
-        setTimeout(()=>{
-            console.log(handleQuiz)
-        },500)
-    }
+    // const onCalculate = () => {
+        
+    // }
 
-    return (
-        <React.Fragment>
-        {start && quiz
-            ?
+    const onCalculate = useCallback(()=>{
+        setNum(num+1);
+    },[num]) 
+    // useCallback은 watch하는 값에 변화가 없으면 굳이 콜백 함수를 재생성하지 않는다. (최적화)
+
+
+    // quiz start!
+    if(start && quiz) 
+        return (
             <Container>
-                <QuestionWrapper>                
-                    <Typing>
-                        <QuestionInfo>1번문제 나갑니다!!!!</QuestionInfo>
-                        <Typing.Backspace count={9} />
-                        <Question>{quiz['1번'].question}</Question>
-                    </Typing>
-                    {quiz[`${handleQuiz['index']}번`].answer_list.split('/').map((ans, index)=>
-                        <QuestionList key={index+1} num={index+1} onClick={onCalculate} content={ans} />
-                    )}
+                <QuestionWrapper>
+                        <React.Fragment>
+                                <QuestionInfo>{num}번문제</QuestionInfo>
+                                {/* <Typing.Backspace count={9} /> */}
+                                <Question>{quiz[num].question}</Question>
+                                {quiz[num].answer_list.split('/').map((ans, index)=>
+                                    <QuestionList key={index+1} num={index+1} clickEvent={onCalculate} content={ans} />
+                                )}
+                        </React.Fragment>
+                    
                 </QuestionWrapper>
             </Container>
-            : 
-            <Container>
-                <Typing>
-                    <h1> 유투브 중독테스트</h1>
-                </Typing>
-                <Icon className="nes-icon youtube is-large"></Icon>
-                <i className="nes-octocat animate"></i>
-                <button onClick={onStart} className="nes-btn is-error">Start!</button>
-            </Container>
-        }
-        </React.Fragment>
+        )
 
+
+
+    // 메인화면
+    return (
+        <Container>
+            <Typing>
+                <h1> 유투브 중독테스트</h1>
+            </Typing>
+            <Icon className="nes-icon youtube is-large"></Icon>
+            {/* <i className="nes-octocat animate"></i> */}
+            <StartButton onClick={onStart} className="nes-btn is-error">깡</StartButton>
+        </Container>
     );
 }
 
 export default Quiz;
 
+const StartButton = styled.button`
+    display: block;
+    width: 200px;
 
+`;
 
 const strong = keyframes`
     from {
