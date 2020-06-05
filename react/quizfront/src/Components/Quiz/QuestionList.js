@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 function QuestionList(props) {
-    const { num, content, clickEvent } = props;
+    const { num, content, clickAnswer } = props;
     const [nes, setNes] = useState('');
     const [answer, setAnswer] = useState(true);
 
@@ -27,13 +27,13 @@ function QuestionList(props) {
         }
         setAnswer(false);
     },1000)
-    },[clickEvent])
+    },[clickAnswer])
 
     return (
         <React.Fragment>
             {answer 
                 ? <RetroBtn className="nes-btn is-disabled">?</RetroBtn>
-                : <RetroBtn onClick={clickEvent} className={`nes-btn ${nes}`}>{content}</RetroBtn>
+                : <RetroBtn onClick={clickAnswer} value={num} className={`nes-btn ${nes}`}>{content}</RetroBtn>
             }
         </React.Fragment>
     )

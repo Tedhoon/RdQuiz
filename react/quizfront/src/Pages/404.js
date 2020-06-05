@@ -1,8 +1,8 @@
 import React from 'react';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
-const PageNotFound = () => {
+function PageNotFound() {
     const history = useHistory();
     const handleGoBack = () => {
         history.goBack();

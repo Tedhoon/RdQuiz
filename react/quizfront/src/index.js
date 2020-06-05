@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Routes from 'Routes';
+// import Routes from 'Routes';
 import { createGlobalStyle } from "styled-components";
 // import reset from "styled-reset";
 import DungGeunMo from "Styles/Fonts/DungGeunMo.ttf";
+import Root from 'Root';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -26,10 +27,11 @@ const GlobalStyle = createGlobalStyle`
     color: #000000
   }
 `;
+
 ReactDOM.render(
   <React.StrictMode>
     <GlobalStyle />
-    <Routes />
+    <Root />
   </React.StrictMode>,
   document.getElementById('root')
 );
