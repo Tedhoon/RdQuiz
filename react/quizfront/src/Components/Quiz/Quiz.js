@@ -5,7 +5,7 @@ import QuestionList from 'Components/Quiz/QuestionList';
 import Typing from 'react-typing-animation';
 import { BACKEND } from 'config';
 import axios from 'axios';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const mockAsyncQuizData = () =>
   new Promise(resolve => {
@@ -20,7 +20,7 @@ const mockAsyncQuizData = () =>
             result.data[4],
         ]
       });
-    }, 150);
+    }, 200);
   });
 
 
@@ -49,29 +49,29 @@ function Quiz() {
         console.log(quizData)
     }
 
-    const goToResult = () => {
-        // await history.push("/result/");
+    const goToResult = useCallback(() => {
+        setTimeout(()=>{
+            history.push({
+                pathname: "/result/",
+                state: {score : score}
+            })
+        }, 2000)
+    })
 
-        history.push({
-            pathname: "/result/",
-            state: {score : score}
-        })
-
-        console.log("정답페이지 ㄱㄱ")   
-        console.log(`당신의 점수는 ${score}점!`)
-    }
-
-    const checkAnswer = useCallback(async (answer) => {
-        if(await answer===quizData[num].answer.toString()){
+    const calculateScore = (answer) => {
+        if(answer===quizData[num].answer.toString()){
             console.log("정답!")
             setScore(score+1)
         } else{
             console.log("땡!")
         }
-        if(num===4) {
+    }
+    const checkAnswer = useCallback(async (answer) => {
+        await calculateScore(answer);
+        if(num===4){
             goToResult();
         }
-    },)
+    })
 
     const clickAnswer = useCallback(async (event)=>{
         await checkAnswer(event.target.value);
@@ -87,6 +87,7 @@ function Quiz() {
         return (
             <Container>
                 <QuestionWrapper>
+                    {score}
                     <QuestionInfo>{num+1}번문제</QuestionInfo>
                     <Question>{quizData[num].question}</Question>
                     {quizData[num].answer_list.split('/').map((content, index)=>
