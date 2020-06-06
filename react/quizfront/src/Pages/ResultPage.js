@@ -44,10 +44,9 @@ function ResultPage() {
                     
                     <ResultInfo>{resultData[score].info}</ResultInfo>
                     <ReStartBtn onClick={handleGoBack}>다시하기</ReStartBtn>
-                    <div id="kakao-link-btn">뭐여</div>
-                    <input type="button" id="kakao-link-btn" value="KAKOA Talk으로 공유하기"/>
+                    
                     <Share>
-                        <input type="button" id="kakao-link-btn" value="KAKOA Talk으로 공유하기"/>
+                    <div id="kakao-link-btn" className="nes-btn is-warning">카톡으로 공유하기</div>
                     </Share>
                 </> 
                 :

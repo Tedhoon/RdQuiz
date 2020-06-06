@@ -105,12 +105,14 @@ function Quiz() {
     )
     return (
         <div>
+            <IconWrap>
+                <Icon onClick={goGang} className="nes-icon youtube is-medium"></Icon>
+            </IconWrap>
             <Typing startDelay={250}>
                 <h2>유튜브 중독테스트</h2>
+                <div>주호민편 comming soon..</div>
             </Typing>
-            <IconWrap>
-                <Icon onClick={goGang} className="nes-icon youtube is-large"></Icon>
-            </IconWrap>
+            
             <StartButton onClick={onStart} className="nes-btn is-primary">1일 7깡 테스트</StartButton>
         </div>
     );
@@ -138,8 +140,8 @@ const Question = styled.div`
     max-width: 280px;
 `;
 const IconWrap = styled.div`
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // align-items: center;
     flex-direction: column;
 `;
 const Icon = styled.i`
