@@ -8,7 +8,20 @@ function ResultPage() {
     const resultData = ResultData;
     const [score, setScore] = useState(null);
     const location = useLocation();
-
+    
+    useEffect(()=>{
+        setTimeout(()=>{
+            window.Kakao.init('3fabadf710529806099b2db7ea2d0041');
+            window.Kakao.Link.createCustomButton({
+            container: '#kakao-link-btn',
+            templateId: 29775,
+            templateArgs: {
+              'title': '1일 7깡 테스트',
+              'description': '나는 1일 몇 깡일까?'
+            }
+            });
+        },300)        
+    },[])
     useEffect(()=>{
         setTimeout(()=>{
             setScore(location.state.score);
@@ -31,8 +44,10 @@ function ResultPage() {
                     
                     <ResultInfo>{resultData[score].info}</ResultInfo>
                     <ReStartBtn onClick={handleGoBack}>다시하기</ReStartBtn>
+                    <div id="kakao-link-btn">뭐여</div>
+                    <input type="button" id="kakao-link-btn" value="KAKOA Talk으로 공유하기"/>
                     <Share>
-                        <div className="addthis_inline_share_toolbox"></div>
+                        <input type="button" id="kakao-link-btn" value="KAKOA Talk으로 공유하기"/>
                     </Share>
                 </> 
                 :
