@@ -22,7 +22,7 @@ daphne==2.3.0
 defusedxml==0.6.0
 diff-match-patch==20181111
 distlib==0.3.0
-Django==2.2.7
+Django==2.2.13
 django-allauth==0.40.0
 django-appconf==1.0.3
 django-autocomplete-light==3.5.1
