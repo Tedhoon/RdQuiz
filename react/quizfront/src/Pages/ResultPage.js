@@ -7,37 +7,54 @@ function ResultPage() {
     const history = useHistory();
     const resultData = ResultData;
     const [score, setScore] = useState(null);
+    const location = useLocation();
 
     useEffect(()=>{
         setTimeout(()=>{
             setScore(location.state.score);
             console.log(resultData)
-        },1250)
-    }) 
-    const location = useLocation();
+        },250)
+    },[]) 
+    
     const handleGoBack = () => (
         history.push("/")
     )
-    return ( 
 
+    return ( 
         <ResultWrapper>
-            {score !== null ?
+            {score !== null?
                 <>
                     <ResultImg src={resultData[score].img} />
-                    <ResultInfo>{score}/5</ResultInfo>
-                    <ResultInfo>{resultData[score].info}</ResultInfo>
+                    <Result>
+                        {resultData[score].grade}
+                        <ResultScore>[{score}/5]</ResultScore>
+                    </Result>
                     
-                    <ReStartBtn onClick={handleGoBack}>뒤로가기</ReStartBtn>
+                    <ResultInfo>{resultData[score].info}</ResultInfo>
+                    <ReStartBtn onClick={handleGoBack}>다시하기</ReStartBtn>
                 </> 
                 :
-                '로딩되는거'
-                
+                ''
             }
         </ ResultWrapper>
     )
 }
 
 export default ResultPage;
+const Result = styled.h1`
+    color: #209cee;
+    text-align: center;
+    margin-top: 5px;
+    position: relative;
+`;
+
+const ResultScore = styled.div`
+    position: absolute;
+    top: 25px;
+    right: 80px;
+    font-size: 0.9rem;
+    color: black;
+`;
 const ResultWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -46,7 +63,8 @@ const ResultWrapper = styled.div`
 const ResultInfo = styled.div`
     display: flex;
     flex-direction: column;
-    width: 280px;
+    width: 300px;
+    margin-bottom: 10px;
 `;
 
 const ResultImg = styled.img`

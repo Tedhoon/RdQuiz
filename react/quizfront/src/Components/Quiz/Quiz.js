@@ -55,39 +55,35 @@ function Quiz() {
                 pathname: "/result/",
                 state: {score : score}
             })
-        }, 2000)
+        }, 800)
     })
-
-    const calculateScore = (answer) => {
-        if(answer===quizData[num].answer.toString()){
-            console.log("정답!")
-            setScore(score+1)
-        } else{
-            console.log("땡!")
-        }
-    }
-    const checkAnswer = useCallback(async (answer) => {
-        await calculateScore(answer);
-        if(num===4){
+    
+    useEffect(()=>{
+        if(num===5){
             goToResult();
         }
+    },[num])
+    
+    const checkAnswer = useCallback(async (answer) => {
+        await new Promise((resolve)=>{
+            if(answer===quizData[num].answer.toString()){
+                setScore(score+1)
+            }
+            resolve();
+        });
     })
 
     const clickAnswer = useCallback(async (event)=>{
         await checkAnswer(event.target.value);
-        console.log(num)
-        if(num!==4) {
+        if(num!==5) {
             setNum(num+1)
         }
     },[num,quizData]) 
-    // quizData도 불러주니까 잘먹어.......흑흑흑
-    // useCallback은 watch하는 값에 변화가 없으면 굳이 콜백 함수를 재생성하지 않는다. (최적화)
 
-    if(start && quizData) 
+    if(start && quizData && num!==5) 
         return (
             <Container>
                 <QuestionWrapper>
-                    {score}
                     <QuestionInfo>{num+1}번문제</QuestionInfo>
                     <Question>{quizData[num].question}</Question>
                     {quizData[num].answer_list.split('/').map((content, index)=>
@@ -96,16 +92,23 @@ function Quiz() {
                 </QuestionWrapper>
             </Container>
         )
-
+    if(num===5)
     return (
-        <Container>
-            <Typing>
-                <h1> 유투브 중독테스트</h1>
+        <>
+        <Typing>
+            <div>loading...</div>
+        </Typing>
+        </>
+    )
+    return (
+        <div>
+            <Typing startDelay={250}>
+            <h3>유투브 중독테스트</h3>
             </Typing>
             <Icon className="nes-icon youtube is-large"></Icon>
             <i className="nes-octocat animate"></i>
             <StartButton onClick={onStart} className="nes-btn is-error">깡</StartButton>
-        </Container>
+        </div>
     );
 }
 
