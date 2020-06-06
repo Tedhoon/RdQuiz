@@ -25,7 +25,7 @@ SECRET_KEY = 'rwbnvk#*ovbqe!a)9m63vamtg90og0ye0kg24j$tp=7dry4fy4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['spnu.net']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

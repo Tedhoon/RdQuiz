@@ -31,6 +31,9 @@ function ResultPage() {
                     
                     <ResultInfo>{resultData[score].info}</ResultInfo>
                     <ReStartBtn onClick={handleGoBack}>다시하기</ReStartBtn>
+                    <Share>
+                        <div className="addthis_inline_share_toolbox"></div>
+                    </Share>
                 </> 
                 :
                 ''
@@ -40,8 +43,9 @@ function ResultPage() {
 }
 
 export default ResultPage;
+
 const Result = styled.h1`
-    color: #209cee;
+    color: #230A59;
     text-align: center;
     margin-top: 5px;
     position: relative;
@@ -73,4 +77,12 @@ const ResultImg = styled.img`
 
 const ReStartBtn = styled.button`
     display: block;
+`;
+
+const Share = styled.div`
+    display: flex;
+    width: 300px;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 7px;
 `;

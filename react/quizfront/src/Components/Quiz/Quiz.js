@@ -111,7 +111,7 @@ function Quiz() {
             <IconWrap>
                 <Icon onClick={goGang} className="nes-icon youtube is-large"></Icon>
             </IconWrap>
-            <StartButton onClick={onStart} className="nes-btn is-error">1일 7깡 테스트</StartButton>
+            <StartButton onClick={onStart} className="nes-btn is-primary">1일 7깡 테스트</StartButton>
         </div>
     );
 }
@@ -130,7 +130,7 @@ const QuestionWrapper = styled.div`
 const QuestionInfo = styled.div`
     font-size: 1.2rem;
     max-width: 280px;
-    font-weigth: 900;
+    font-weight: bold;
 `;
 
 const Question = styled.div`
