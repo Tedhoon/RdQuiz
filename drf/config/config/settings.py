@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rwbnvk#*ovbqe!a)9m63vamtg90og0ye0kg24j$tp=7dry4fy4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['spnu.net']
 
 
 # Application definition
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = (
+       'spnu.net',
        'http://localhost:3000',    #React 도메인
        'http://localhost:8000',    #Django 도메인
 )
