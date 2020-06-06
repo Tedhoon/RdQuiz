@@ -34,8 +34,4 @@ const Section = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  @media only screen and (max-width: 415px) {
-    height: calc(100% - 60px);
-  }
 `;

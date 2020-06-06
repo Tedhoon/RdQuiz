@@ -46,7 +46,6 @@ function Quiz() {
 
     const onStart = () => {
         setStart(true);
-        console.log(quizData)
     }
 
     const goToResult = useCallback(() => {
@@ -55,7 +54,7 @@ function Quiz() {
                 pathname: "/result/",
                 state: {score : score}
             })
-        }, 800)
+        }, 850)
     })
     
     useEffect(()=>{
@@ -114,7 +113,6 @@ function Quiz() {
 
 export default Quiz;
 
-// styled-components
 const StartButton = styled.button`
     display: block;
     width: 280px;

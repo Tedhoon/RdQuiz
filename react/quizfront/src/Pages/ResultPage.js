@@ -12,7 +12,6 @@ function ResultPage() {
     useEffect(()=>{
         setTimeout(()=>{
             setScore(location.state.score);
-            console.log(resultData)
         },250)
     },[]) 
     
