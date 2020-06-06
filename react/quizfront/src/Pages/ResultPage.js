@@ -6,7 +6,7 @@ import styled from 'styled-components';
 function ResultPage() {
     const history = useHistory();
     const resultData = ResultData;
-    const [score, setScore] = useState('');
+    const [score, setScore] = useState(null);
 
     useEffect(()=>{
         setTimeout(()=>{
@@ -21,7 +21,7 @@ function ResultPage() {
     return ( 
 
         <ResultWrapper>
-            {score?
+            {score !== null ?
                 <>
                     <ResultImg src={resultData[score].img} />
                     <ResultInfo>{score}/5</ResultInfo>
