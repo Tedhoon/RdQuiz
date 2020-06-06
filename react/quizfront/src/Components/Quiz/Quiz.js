@@ -102,7 +102,7 @@ function Quiz() {
     return (
         <div>
             <Typing startDelay={250}>
-            <h3>유투브 중독테스트</h3>
+            <h3>유튜브 중독테스트</h3>
             </Typing>
             <Icon className="nes-icon youtube is-large"></Icon>
             <i className="nes-octocat animate"></i>

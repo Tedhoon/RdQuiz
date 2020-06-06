@@ -2,7 +2,6 @@ import React from 'react';
 import Nav from 'Components/Base/Nav';
 // import Footer from 'Components/Base/Footer';
 import styled from "styled-components";
-import Quiz from 'Components/Quiz/Quiz';
 import Routes from 'Routes';
 
 const Root = () => {

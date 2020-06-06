@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import Routes from 'Routes';
 import { createGlobalStyle } from "styled-components";
-// import reset from "styled-reset";
 import DungGeunMo from "Styles/Fonts/DungGeunMo.ttf";
+import { Helmet } from "react-helmet";
 import Root from 'Root';
-
+import OGIMAGE from 'Data/Result/Images/gang.jpg'
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -30,6 +29,11 @@ const GlobalStyle = createGlobalStyle`
 
 ReactDOM.render(
   <React.StrictMode>
+    <Helmet>
+      <meta property="og:title" content='유투브 중독테스트' />
+      <meta property="og:description" content="깡" />
+      <meta property="og:image" content={OGIMAGE} />
+    </Helmet>
     <GlobalStyle />
     <Root />
   </React.StrictMode>,
