@@ -1,17 +1,28 @@
 import React from 'react';
 import Nav from 'Components/Base/Nav';
-// import Footer from 'Components/Base/Footer';
+import Footer from 'Components/Base/Footer';
 import styled from "styled-components";
 import Routes from 'Routes';
+import {Helmet} from "react-helmet";
+import OGIMAGE from 'Data/Result/Images/gang.jpg';
+import FAVICON from 'Data/Result/Images/favicon.ico';
 
 const Root = () => {
   return(
     <MainWrapper>
+      <Helmet>
+        <title>1일 7깡 테스트</title>
+        <link rel="icon" href={FAVICON} />
+        <meta property="og:title" content='유튜브 중독테스트' />
+        <meta property="og:description" content="1일 7깡 테스트" />
+        <meta property="og:image" content={OGIMAGE} />
+        <meta name="description" content="1일 7깡 테스트" />
+      </Helmet>
       <Nav />
       <Section>
         <Routes />
       </Section>
-      {/* <Footer /> */}
+      <Footer />
     </MainWrapper>
   )
 }

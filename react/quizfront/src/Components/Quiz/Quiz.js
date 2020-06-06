@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { Container } from 'nes-react';
 import QuestionList from 'Components/Quiz/QuestionList';
 import Typing from 'react-typing-animation';
@@ -48,6 +48,10 @@ function Quiz() {
         setStart(true);
     }
 
+    const goGang = () => {
+        window.open("https://www.youtube.com/watch?v=xqFvYsy4wE4");
+    }
+
     const goToResult = useCallback(() => {
         setTimeout(()=>{
             history.push({
@@ -63,7 +67,7 @@ function Quiz() {
         }
     },[num])
     
-    const checkAnswer = useCallback(async (answer) => {
+    const checkAnswer = (async (answer) => {
         await new Promise((resolve)=>{
             if(answer===quizData[num].answer.toString()){
                 setScore(score+1)
@@ -102,11 +106,12 @@ function Quiz() {
     return (
         <div>
             <Typing startDelay={250}>
-            <h3>유튜브 중독테스트</h3>
+                <h2>유튜브 중독테스트</h2>
             </Typing>
-            <Icon className="nes-icon youtube is-large"></Icon>
-            <i className="nes-octocat animate"></i>
-            <StartButton onClick={onStart} className="nes-btn is-error">깡</StartButton>
+            <IconWrap>
+                <Icon onClick={goGang} className="nes-icon youtube is-large"></Icon>
+            </IconWrap>
+            <StartButton onClick={onStart} className="nes-btn is-error">1일 7깡 테스트</StartButton>
         </div>
     );
 }
@@ -116,16 +121,6 @@ export default Quiz;
 const StartButton = styled.button`
     display: block;
     width: 280px;
-
-`;
-
-const strong = keyframes`
-    from {
-        font-weight: 100;
-    }
-    to {
-        font-weight: 900;
-    }
 `;
 
 const QuestionWrapper = styled.div`
@@ -135,15 +130,20 @@ const QuestionWrapper = styled.div`
 const QuestionInfo = styled.div`
     font-size: 1.2rem;
     max-width: 280px;
-    animation: ${strong} 0.1s ease-in forwards normal;
+    font-weigth: 900;
 `;
 
 const Question = styled.div`
     font-size: 1.4rem;
     max-width: 280px;
 `;
-
+const IconWrap = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+`;
 const Icon = styled.i`
+    display: flex;
     margin: 5px;
     cursor: url(https://unpkg.com/nes.css/assets/cursor-click.png), pointer;
 `;

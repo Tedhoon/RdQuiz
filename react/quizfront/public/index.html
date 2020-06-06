@@ -1,18 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-150304514-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-150304514-1');
+    </script>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="유튜브 중독테스트 - 깡"
-    />
-    <title>Random Quiz</title>
   </head>
   <body>
-
     <div id="root"></div>
-
+    <div class="kakaoad" style="position: absolute; left: 50%; bottom: 30.5px; transform: translate(-50%, -50%);">
+    <ins class="kakao_ad_area" style="display:none;" 
+      data-ad-unit    = "DAN-1h7x0mcxirdx4" 
+      data-ad-width   = "320" 
+      data-ad-height  = "50"></ins> 
+    <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+    </div>
   </body>
 </html>
