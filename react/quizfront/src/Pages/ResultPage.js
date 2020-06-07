@@ -17,7 +17,8 @@ function ResultPage() {
             templateId: 29775,
             templateArgs: {
               'title': '1일 7깡 테스트',
-              'description': '나는 1일 몇 깡일까?'
+              'description': '나는 1일 몇 깡일까?',
+              'url': 'http://spnu.net'
             }
             });
         },300)        
