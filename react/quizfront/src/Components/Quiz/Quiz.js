@@ -110,10 +110,10 @@ function Quiz() {
             </IconWrap>
             <Typing startDelay={250}>
                 <h2>유튜브 중독테스트</h2>
-                <div>주호민편 comming soon..</div>
+                <div>주호민편 coming soon..</div>
             </Typing>
             
-            <StartButton onClick={onStart} className="nes-btn is-primary">1일 7깡 테스트</StartButton>
+            <StartButton onClick={onStart} className="nes-btn is-warning">1일 7깡 테스트</StartButton>
         </div>
     );
 }
