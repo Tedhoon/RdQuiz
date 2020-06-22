@@ -7,29 +7,56 @@ import { BACKEND } from 'config';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
+
+const mockAsyncCategoryData = () => 
+    new Promise(resolve => {
+        setTimeout(async function() {
+            const result = await axios.get(`${BACKEND}/api/category`)
+            resolve({
+                data: [
+                    result.data,
+                ]
+            })
+        }, 200)
+    })
+
 const mockAsyncQuizData = () =>
-  new Promise(resolve => {
-    setTimeout(async function() {
-      const result = await axios.get(`${BACKEND}/api/quiz`)
-      resolve({
-        data: [
-            result.data[0],
-            result.data[1],
-            result.data[2],
-            result.data[3],
-            result.data[4],
-        ]
-      });
-    }, 200);
-  });
+    new Promise(resolve => {
+        setTimeout(async function() {
+            const result = await axios.get(`${BACKEND}/api/quiz/1/`)
+            resolve({
+                data: [
+                    result.data[0],
+                    result.data[1],
+                    result.data[2],
+                    result.data[3],
+                    result.data[4],
+                ]
+            });
+        }, 200);
+    });
 
 
 function Quiz() {
+    const [category, setCategory] = useState(null);
+
+
     const [start, setStart] = useState(false);
     const [quizData, setQuizData] = useState(null);
     const [num, setNum] = useState(0);     
     const [score, setScore] = useState(0);
     const history = useHistory();
+
+
+    const getCategory = useCallback(async () => {
+        try {
+          const { data } = await mockAsyncCategoryData();
+          setCategory(data);
+        } catch (err) {
+          console.error(err);
+        }
+      },[]);
+
 
     const getQuiz = useCallback(async () => {
         try {
@@ -41,11 +68,13 @@ function Quiz() {
       },[]);
     
     useEffect(()=>{
-        getQuiz();
+        // getQuiz();
+        getCategory().then(console.log(category));
     },[])
 
     const onStart = () => {
         setStart(true);
+        console.log(category)
     }
 
     const goGang = () => {
@@ -104,17 +133,23 @@ function Quiz() {
         </>
     )
     return (
-        <div>
+        <>
             <IconWrap>
                 <Icon onClick={goGang} className="nes-icon youtube is-medium"></Icon>
             </IconWrap>
             <Typing startDelay={250}>
                 <h2>유튜브 중독테스트</h2>
-                <div>주호민편 coming soon..</div>
+                {/* <div>주호민편 coming soon..</div> */}
+                {category? category[0].map((cate, index)=>{
+
+                    <StartButton onClick={onStart} className="nes-btn is-warning">{cate.category}</StartButton>
+                    
+                }
+                )
+                 : ''}
             </Typing>
             
-            <StartButton onClick={onStart} className="nes-btn is-warning">1일 7깡 테스트</StartButton>
-        </div>
+        </>
     );
 }
 
