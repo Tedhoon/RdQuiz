@@ -7,7 +7,8 @@ class Category(models.Model):
         verbose_name_plural = '퀴즈 카테고리들'
 
     category = models.CharField('카테고리', max_length=100)
-
+    is_open = models.BooleanField('공개', default=False)
+    
     def __str__(self):
         return self.category
 
