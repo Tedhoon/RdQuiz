@@ -18,10 +18,10 @@ const mockAsyncCategoryData = () =>
         }, 200)
     })
 
-const mockAsyncQuizData = () =>
+const mockAsyncQuizData = (pk) =>
     new Promise(resolve => {
         setTimeout(async function() {
-            const result = await axios.get(`${BACKEND}/api/quiz/1/`)
+            const result = await axios.get(`${BACKEND}/api/quiz/${pk}/`)
             resolve({
                 data: [
                     result.data[0],
@@ -56,9 +56,9 @@ function Quiz() {
       },[]);
 
 
-    const getQuiz = useCallback(async () => {
+    const getQuiz = useCallback(async (pk) => {
         try {
-          const { data } = await mockAsyncQuizData();
+          const { data } = await mockAsyncQuizData(pk);
           setQuizData(data);
         } catch (err) {
           console.error(err);
@@ -72,15 +72,8 @@ function Quiz() {
 
     const onStart = (event) => {
         setStart(true);
-        // console.log(category)
-        // console.log(category.map(cate=>{
-            
-        // }))
-
-
-        let result2 = category.map(x => { return x['id'] });
-        console.log(result2);
-        console.log(event.target.id)
+        const pk = event.target.id
+        getQuiz(pk)
     }
 
     const goGang = () => {
@@ -144,14 +137,12 @@ function Quiz() {
                 <Icon onClick={goGang} className="nes-icon youtube is-medium"></Icon>
             </IconWrap>
                 <h2>유튜브 중독테스트</h2>
-                <div>
-                    {category?
-                        category.map(cate=>
-                            <StartButton key={cate['id']} id={cate['id']} onClick={onStart} className="nes-btn is-warning">{cate['category']}</StartButton>
-                        )
-                        : ''
-                    }
-                 </div>
+                {category?
+                    category.map(cate=>
+                        <StartButton key={cate['id']} id={cate['id']} onClick={onStart} className="nes-btn is-warning">{cate['category']}</StartButton>
+                    )
+                    : ''
+                } 
         </div>
     );
 }
