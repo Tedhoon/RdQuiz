@@ -13,9 +13,7 @@ const mockAsyncCategoryData = () =>
         setTimeout(async function() {
             const result = await axios.get(`${BACKEND}/api/category`)
             resolve({
-                data: [
-                    result.data,
-                ]
+                data: result.data,
             })
         }, 200)
     })
@@ -72,9 +70,17 @@ function Quiz() {
         getCategory().then(console.log(category));
     },[])
 
-    const onStart = () => {
+    const onStart = (event) => {
         setStart(true);
-        console.log(category)
+        // console.log(category)
+        // console.log(category.map(cate=>{
+            
+        // }))
+
+
+        let result2 = category.map(x => { return x['id'] });
+        console.log(result2);
+        console.log(event.target.id)
     }
 
     const goGang = () => {
@@ -133,23 +139,20 @@ function Quiz() {
         </>
     )
     return (
-        <>
+        <div>
             <IconWrap>
                 <Icon onClick={goGang} className="nes-icon youtube is-medium"></Icon>
             </IconWrap>
-            <Typing startDelay={250}>
                 <h2>유튜브 중독테스트</h2>
-                {/* <div>주호민편 coming soon..</div> */}
-                {category? category[0].map((cate, index)=>{
-
-                    <StartButton onClick={onStart} className="nes-btn is-warning">{cate.category}</StartButton>
-                    
-                }
-                )
-                 : ''}
-            </Typing>
-            
-        </>
+                <div>
+                    {category?
+                        category.map(cate=>
+                            <StartButton key={cate['id']} id={cate['id']} onClick={onStart} className="nes-btn is-warning">{cate['category']}</StartButton>
+                        )
+                        : ''
+                    }
+                 </div>
+        </div>
     );
 }
 
@@ -158,6 +161,7 @@ export default Quiz;
 const StartButton = styled.button`
     display: block;
     width: 280px;
+    margin-bottom: 18px;
 `;
 
 const QuestionWrapper = styled.div`
