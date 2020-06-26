@@ -7,7 +7,7 @@ import random
 
 class CategoryView(APIView):
     '''
-    랜덤 퀴즈!
+    랜덤 퀴즈 카테고리!
     '''
     def get(self, request, format=None):
         queryset = Category.objects.filter(is_open=True)
@@ -25,3 +25,9 @@ class QuizView(APIView):
         serializer = QuizSerializer(randomset[0:5], many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+
+# class Result(APIView):
+#     '''
+#     퀴즈 결과!
+#     '''
+#     def get(self, request, pk, format=None):
