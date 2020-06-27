@@ -37,8 +37,7 @@ const mockAsyncQuizData = (pk) =>
 
 function Quiz() {
     const [category, setCategory] = useState(null);
-
-
+    const [currentCategory, setCurrentCategory] = useState(null);
     const [start, setStart] = useState(false);
     const [quizData, setQuizData] = useState(null);
     const [num, setNum] = useState(0);     
@@ -66,14 +65,22 @@ function Quiz() {
       },[]);
     
     useEffect(()=>{
-        // getQuiz();
-        getCategory().then(console.log(category));
+        getCategory()
     },[])
 
-    const onStart = (event) => {
-        setStart(true);
+    // list 안에 특정 key값 추출을 위한 함수
+    const filterCategoryList = (allCategory, pk) => { 
+        return allCategory.filter(object => {
+            return object['id'] === parseInt(pk) 
+        })
+    }
+
+    const onStart = async (event) => {
         const pk = event.target.id
         getQuiz(pk)
+        setStart(true);
+        const filterCategory = await filterCategoryList(category, pk)
+        setCurrentCategory(filterCategory)
     }
 
     const goGang = () => {
@@ -83,15 +90,18 @@ function Quiz() {
     const goToResult = useCallback(() => {
         setTimeout(()=>{
             history.push({
-                pathname: "/result/",
-                state: {score : score}
+                pathname: "/renew_result/",
+                state: {
+                    score : score,
+                    category : currentCategory
+                }
             })
         }, 850)
     })
     
     useEffect(()=>{
         if(num===5){
-            goToResult();
+            goToResult(1);
         }
     },[num])
     

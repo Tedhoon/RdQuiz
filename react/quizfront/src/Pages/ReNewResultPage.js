@@ -3,10 +3,11 @@ import { useHistory, useLocation } from 'react-router-dom';
 import ResultData from 'Data/Result/ResultData';
 import styled from 'styled-components';
 
-function ResultPage() {
+function ReNewResultPage() {
     const history = useHistory();
     const resultData = ResultData;
     const [score, setScore] = useState(null);
+    const [category, setCategory] = useState(null);
     const location = useLocation();
     
     useEffect(()=>{
@@ -26,6 +27,10 @@ function ResultPage() {
     
     useEffect(()=>{
         setTimeout(()=>{
+            console.log(location.state.category);
+            console.log(location)
+            console.log(location.state)
+            console.log(location.state.score)
             setScore(location.state.score);
         },250)
     },[]) 
@@ -58,7 +63,7 @@ function ResultPage() {
     )
 }
 
-export default ResultPage;
+export default ReNewResultPage;
 
 const Result = styled.h1`
     color: #230A59;
