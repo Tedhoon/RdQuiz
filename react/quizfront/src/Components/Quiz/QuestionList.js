@@ -26,7 +26,7 @@ function QuestionList(props) {
                 setNes('is-primary');
         }
         setAnswer(false);
-    },1000)
+    },1)
     },[clickAnswer])
 
     return (

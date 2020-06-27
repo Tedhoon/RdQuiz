@@ -23,6 +23,7 @@ function ResultPage() {
             });
         },300)        
     },[])
+    
     useEffect(()=>{
         setTimeout(()=>{
             setScore(location.state.score);
