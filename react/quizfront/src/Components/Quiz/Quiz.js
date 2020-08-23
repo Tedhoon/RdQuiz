@@ -75,17 +75,17 @@ function Quiz() {
         })
     }
 
-    const onStart = async (event) => {
+    const onStart = useCallback(async (event) => {
         const pk = event.target.id
         getQuiz(pk)
         setStart(true);
         const filterCategory = await filterCategoryList(category, pk)
         setCurrentCategory(filterCategory)
-    }
+    }, [start, quizData, category])
 
-    const goGang = () => {
+    const goGang = useCallback(() => {
         window.open("https://www.youtube.com/watch?v=xqFvYsy4wE4");
-    }
+    }, [])
 
     const goToResult = useCallback(() => {
         setTimeout(()=>{
@@ -119,7 +119,7 @@ function Quiz() {
         if(num!==5) {
             setNum(num+1)
         }
-    },[num,quizData]) 
+    },[num, quizData]) 
 
     if(start && quizData && num!==5) 
         return (
@@ -157,7 +157,7 @@ function Quiz() {
     );
 }
 
-export default Quiz;
+export default React.memo(Quiz);
 
 const StartButton = styled.button`
     display: block;

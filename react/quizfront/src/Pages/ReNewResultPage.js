@@ -80,7 +80,7 @@ function ReNewResultPage() {
     )
 }
 
-export default ReNewResultPage;
+export default React.memo(ReNewResultPage);
 
 const Result = styled.h1`
     color: #230A59;

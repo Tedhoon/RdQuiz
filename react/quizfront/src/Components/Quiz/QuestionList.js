@@ -5,28 +5,27 @@ function QuestionList(props) {
     const { num, content, clickAnswer } = props;
     const [nes, setNes] = useState('');
     const [answer, setAnswer] = useState(true);
-
     useEffect(()=>{
         setAnswer(true);
         setTimeout(() => {
-        switch(num) {
-            case 1:
-                setNes('is-success');
-                break;
-            case 2:
-                setNes('is-warning');
-                break;
-            case 3:
-                setNes('is-error');
-                break;
-            case 4:
-                setNes('is-primary');
-                break;
-            default:
-                setNes('is-primary');
-        }
-        setAnswer(false);
-    },1)
+            switch(num) {
+                case 1:
+                    setNes('is-success');
+                    break;
+                case 2:
+                    setNes('is-warning');
+                    break;
+                case 3:
+                    setNes('is-error');
+                    break;
+                case 4:
+                    setNes('is-primary');
+                    break;
+                default:
+                    setNes('is-primary');
+            }
+            setAnswer(false);
+        },50)
     },[clickAnswer])
 
     return (
@@ -39,7 +38,7 @@ function QuestionList(props) {
     )
 }
 
-export default QuestionList;
+export default React.memo(QuestionList);
 
 const RetroBtn = styled.button`
     display: block;
