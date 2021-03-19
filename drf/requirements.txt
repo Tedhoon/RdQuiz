@@ -4,6 +4,6 @@ async-timeout==3.0.1
 attrs==19.1.0
 autobahn==19.7.2
 Automat==0.7.0
-Django==2.2.7
+Django==2.2.18
 djangorestframework==3.10.1
 Pillow==6.1.0
