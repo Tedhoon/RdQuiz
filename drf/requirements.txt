@@ -2,7 +2,7 @@ asgiref==3.2.0
 asn1crypto==0.24.0
 async-timeout==3.0.1
 attrs==19.1.0
-autobahn==19.7.2
+autobahn==20.12.3
 Automat==0.7.0
 Django==2.2.7
 djangorestframework==3.10.1
